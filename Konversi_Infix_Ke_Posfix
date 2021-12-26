@@ -1,0 +1,146 @@
+#include <iostream>
+#define MAX 10
+using namespace std;
+
+char operand[25];
+char stack[25];
+double hasil[25];
+double temp;
+char take;
+int top= -1;
+int index;
+
+void push (char infix){
+  if (top < MAX - 1) {
+    top++;
+    stack[top] = infix;
+  }else{
+    cout << " Data Penuh " << endl;
+  }
+}
+
+void pop (){
+  if (top > -1) {
+    cout << "Ambil: " << stack[top] << endl;
+    take = stack [top];
+    top--;
+  }else{
+    cout << " Data kosong" << endl;
+  }
+}
+
+int opr (char a){
+  if (a == '+' || a=='-'){
+    return 1;
+  } 
+  if (a == '*' || a == '/'){
+    return 2;
+  }
+  if (a == '^'){
+    return 3;
+  }
+  	return 0;
+}
+
+void postfix (string data){
+  int index = 0;
+  for (int i = 0; i < data.length(); i++){
+    if (opr(data[i]) > 0){
+      if (top < 0){
+        push(data[i]);
+      }else{
+        if (opr(data[i]) <= opr(stack[top])){
+          pop();
+          operand[index] = take;
+          index++;
+          push(data[i]);
+        }else if (opr(data[i]) >= opr(stack[top])){
+          push(data[i]);
+        }
+      }
+    }else if (data[i]=='('){
+    	push (data[i]);
+	}else if (data[i]==')'){
+		pop();
+		operand[index]=take;
+		index++;
+	}else{
+      operand[index] = data[i]; 
+      index++;
+    }
+  }
+  
+  for (int a = top; a>= 0; a--){
+    pop();
+    operand[index] = take;
+    index++;
+  }
+}
+
+void stacks (double a){
+	if(top < MAX-1){
+		top = top + 1;
+		hasil[top] = a;
+	}else{
+		cout <<" Data penuh \n";
+	}
+}
+void dell(){
+	if (top > - 1){
+		temp = hasil[top];
+		top--;
+	}else{
+		cout<<" Data Kosong \n";
+	}
+}
+
+void hitung(int index){
+	for (int a=0; a<index; a++){
+		if(opr(operand[a])==0){
+			stacks(double (operand[a])-48);
+		}else if(operand [a]=='+'){
+			dell();
+			double hitung = temp + hasil[top];
+			dell();
+			stacks(hitung);
+		}else if(operand [a]=='-'){
+			dell();
+			double hitung = hasil[top] - temp;
+			dell();
+			stacks(hitung);
+		}else if(operand [a]=='/'){
+			dell();
+			double hitung = temp / hasil[top];
+			dell();
+			stacks(hitung);	
+		}else if(operand [a]=='*'){
+			dell();
+			double hitung = temp * hasil[top];
+			dell();
+			stacks(hitung);
+		}
+	}
+}
+int main(){
+    cout<<" NAMA \t: SUKRON KATSIR \n NIM \t: 2020520012 \n";
+  	string data;
+  	cout << " Masukkan infix: ";
+  	cin >> data;
+  	postfix(data);
+
+  	cout<<"Posfixnya aldalah : ";
+  	for (int i = 0; i < data.length(); i++){
+	  if(operand[i]!='(') {
+	  	push(operand[i]);
+	  	index++;	
+	  }
+	  cout<<operand[i];	
+  	}
+
+  	cout<<"\n Hasil perhitungannya adalah : ";
+  	top = -1;
+  	hitung(index);
+  	cout << hasil[0];
+	  	
+  	return 0;
+}
