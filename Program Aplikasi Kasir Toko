@@ -1,0 +1,150 @@
+#include <iostream>
+#include <iomanip> //untuk mengatur lebar tampilan dilayar dari suatu nilai variabel
+using namespace std;
+int main(){
+	int jum_beli, bayar,diskon,jumlah[100], harga[100], tot_harga[100],i,tot;
+	string nama,nama_barang[50];
+	char pilih,balik;
+	cout<<"=========================================================="<<endl;
+	cout<<"     //\\\\ ||          SELAMAT DATANG         || //\\\\ "<<endl;
+	cout<<"    //  \\\\||                DI               ||//  \\\\ "<<endl;
+	cout<<"    \\\\  //||               TOKO              ||\\\\  // "<<endl;
+	cout<<"     \\\\// ||         SUPER JAYA ABADI        || \\\\// "<<endl;
+	cout<<"=========================================================="<<endl;
+	cout<<endl;
+	cout<<endl;
+	cout<<"Apakah Anda Seorang Member (y/t): ";
+	cin>>pilih;
+	if(pilih== 'Y'||pilih== 'y'){
+		cout<<"     //              Selamat Datang             \\\\"<<endl;
+		cout<<"    //                   MEMBER                  \\\\"<<endl;
+		cout<<"    \\\\      Anda mendapat potongan harga 10%     //"<<endl;
+		cout<<"     \\\\jika total pembelian lebih dari Rp200.000//"<<endl;
+		cout<<endl<<endl;
+		pertama:
+		string nama;
+		cout<<"Nama : ";
+		cin>>nama;
+		cout<<"jumlah barang yang di beli : ";
+		cin>>jum_beli;
+		cout<<"__________________________________________________________"<<endl;
+		
+		for(i=0; i<jum_beli; i++){
+			cout<<endl;
+			cout<<"Barang Ke-"<<i+1<<endl;
+			cout<<endl;
+			cout<<"Nama Barang	: ";
+			cin>>nama_barang[i];
+			cout<<"Jumlah		: ";
+			cin>>jumlah[i];
+			cout<<"Harga		: ";
+			cin>>harga[i];
+			cout<<"__________________________________________________________"<<endl;
+			
+			tot_harga[i]=jumlah[i]*harga[i];
+			tot+=tot_harga[i];	
+		}
+			cout<<endl<<endl;
+			cout<<"=========================================================="<<endl;
+			cout<<setw(12)<<"          STRUK BELANJA TOKO SUPER JAYA ABADI"<<endl;
+			cout<<"=========================================================="<<endl;
+			cout<<"    NO     BARANG     JUMLAH     HARGA     TOTAL HARGA"<<endl;
+			for (int i=0;i<jum_beli;i++){
+				cout<<setw(6)<<i+1<<setw(11)<<nama_barang[i]<<setw(11)<<jumlah[i]<<setw(10)<<harga[i]<<setw(16)<<tot_harga[i]<<endl; //Menampilkan semua nilai array
+			}
+			cout<<"__________________________________________________________"<<endl;
+			
+			if(tot>=200000){
+				diskon= 0.10*tot;
+			}else {
+				diskon= 0;
+			}
+			cout<<"Jumlah Bayar : Rp."<<tot<<endl;
+			cout<<"Diskon       : Rp."<<diskon<<endl;
+			cout<<"Total Bayar  : Rp."<<tot-diskon<<endl;
+			cout<<"Bayar        : Rp.";
+			cin>>bayar;
+			cout<<"Kembali      : Rp."<<bayar-(tot-diskon)<<endl;
+			cout<<" ________________________________________________________"<<endl;
+			cout<<"| TERIMAKASIH SUDAH BERBELANJA DI TOKO SUPER JAYA ABADI  |"<<endl;
+			cout<<"| Maaf Barang Yang Sudah DiBeli tidak Dapat DiKembalikan |"<<endl;
+			cout<<"|________________________________________________________|"<<endl<<endl;
+			cout<<"Apakah Masih Mau Transaksi Lagi (y/t): ";
+			cin>>balik;
+			if(balik== 'y'||balik=='Y'){
+				cout<<"=========================================================="<<endl;
+				goto pertama;
+			}else if(balik=='t'||balik=='T'){
+				cout<<" _________________"<<endl;
+				cout<<"|TRANSAKSI SELESAI|"<<endl;
+				cout<<"|_________________|";
+			}else{
+				cout<<" ________________________________________"<<endl;
+				cout<<"|INPUTAN SALAH TRANSAKSI DIANGGAP SELESAI|"<<endl;
+				cout<<"|________________________________________|";
+			}
+		}else if(pilih== 'T'||pilih== 't'){
+			cout<<"         //         Selamat Datang           \\\\"<<endl;
+			cout<<"        //           Sayang Sekali            \\\\"<<endl;
+			cout<<"        \\\\         Anda Bukan MEMBER          //"<<endl;
+			cout<<"         \\\\jadi tidak mendapat potongan harga//"<<endl;
+			cout<<endl<<endl;
+			
+			cout<<"Nama : ";
+			cin>>nama;
+			cout<<"jumlah barang yang di beli : ";
+			cin>>jum_beli;
+			cout<<"__________________________________________________________"<<endl;
+		
+			for(i=0; i<jum_beli; i++){
+				cout<<endl;
+				cout<<"Barang Ke-"<<i+1<<endl;
+				cout<<endl;
+				cout<<"Nama Barang	: ";
+				cin>>nama_barang[i];
+				cout<<"Jumlah		: ";
+				cin>>jumlah[i];
+				cout<<"Harga		: ";
+				cin>>harga[i];
+				cout<<"__________________________________________________________"<<endl;
+			
+				tot_harga[i]=jumlah[i]*harga[i];
+				tot+=tot_harga[i];	
+			}
+				cout<<endl<<endl;
+				cout<<"=========================================================="<<endl;
+				cout<<setw(12)<<"          STRUK BELANJA TOKO SUPER JAYA ABADI"<<endl;
+				cout<<"=========================================================="<<endl;
+				cout<<"    NO     BARANG     JUMLAH     HARGA     TOTAL HARGA"<<endl;
+				for (int i=0;i<jum_beli;i++){
+					cout<<setw(6)<<i+1<<setw(11)<<nama_barang[i]<<setw(11)<<jumlah[i]<<setw(10)<<harga[i]<<setw(16)<<tot_harga[i]<<endl; //Menampilkan semua nilai array
+				}
+				cout<<"__________________________________________________________"<<endl;
+				cout<<"Jumlah Bayar : Rp."<<tot<<endl;
+				cout<<"Diskon       : Rp."<<diskon<<endl;
+				cout<<"Total Bayar  : Rp."<<tot-diskon<<endl;
+				cout<<"Bayar        : Rp.";
+				cin>>bayar;
+				cout<<"Kembali      : Rp."<<bayar-(tot-diskon)<<endl;
+				cout<<" ________________________________________________________"<<endl;
+				cout<<"| TERIMAKASIH SUDAH BERBELANJA DI TOKO SUPER JAYA ABADI  |"<<endl;
+				cout<<"| Maaf Barang Yang Sudah DiBeli tidak Dapat DiKembalikan |"<<endl;
+				cout<<"|________________________________________________________|"<<endl<<endl;
+				cout<<"Apakah Masih Mau Transaksi Lagi (y/t): ";
+				cin>>balik;
+				if(balik== 'y'||balik=='Y'){
+					cout<<"=========================================================="<<endl;
+					goto pertama;
+				}else if(balik=='t'||balik=='T'){
+					cout<<" _________________"<<endl;
+					cout<<"|TRANSAKSI SELESAI|"<<endl;
+					cout<<"|_________________|";
+				}else{
+					cout<<" ________________________________________"<<endl;
+					cout<<"|INPUTAN SALAH TRANSAKSI DIANGGAP SELESAI|"<<endl;
+					cout<<"|________________________________________|";
+				}
+	 }else{
+			cout<<"INPUTAN SALAH SILAHKAN KETIK ULANG";
+		}
+}
