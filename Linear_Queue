@@ -1,0 +1,95 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+struct{
+    int data[10], depan = 0, belakang = -1;
+}A;
+
+void masuk (){
+    int baru;
+    if (A.belakang == 3 - 1){
+        cout<<"penuh";
+        getch ();
+    }else{
+        cout<<"Masukkan = ";
+        cin>>baru;
+        cout<<"Mobil dengan nomor "<<baru<<" sudah masuk ";
+        A.belakang++;
+        A.data [A.belakang] = baru;
+        getch ();
+    }
+}
+
+void tampil(){
+    if (A.belakang==-1&&A.depan==0){
+        cout<<"Tidak ada mobil yang diparkir";
+        getch ();
+    }else{
+        cout<<"---daftar mobil masuk---\n";
+        for (int i=A.depan; i<=A.belakang; i++){ 
+            cout<<" Mobil ke "<<i<<": " <<A.data [i]<<endl;
+        }
+        getch();
+    }
+}
+
+void keluar(){
+    if (A.depan<=A.belakang){
+        cout<<"Mobil keluar nomor : "<<A.data[A.depan];
+        A.depan++;
+        getch ();
+    }else{
+        cout<<"Parkiran Sudah kosong";
+        getch ();
+    } 
+}
+
+void Pkosong (){
+    A.belakang=-1;
+    A.depan=0;
+    cout<<"Yah parkiran sudah kosong nih...!";
+    getch();   
+}
+
+int main(){
+
+    int pilih;
+    menu:
+    system ("cls");
+    cout<<"--------------- Menu Antrian PARKIR MOBIL------------\n";
+    cout<<"1.MOBIL MASUK \n";
+    cout<<"2.MOBIL KELUAR \n";
+    cout<<"3.TAMPILKAN JUMLAH MOBIL MASUK \n";
+    cout<<"4.Keluarkan semua mobil parkir \n";
+    cout<<"Masukkan Pilihan : ";
+    cin>>pilih;
+    switch(pilih){
+        case 1:
+            masuk();
+            getch;
+            goto menu;
+            break;
+        case 2:
+            keluar();
+            getch;
+            goto menu;
+            break;
+        case 3:
+            tampil();
+            getch;
+            goto menu;
+            break;
+        case 4:
+            Pkosong();           
+            getch;
+            goto menu;
+            break;
+        default:
+            cout<<"Silahkan masukkan pilihan yang benar ";
+            getch();
+            goto menu;
+            break;
+           
+    }
+}
