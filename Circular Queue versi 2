@@ -1,0 +1,103 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+const int MAX=3;
+
+void masuk(int[],int,int&,int&);
+void hapus(int[],int&,int&);
+void display(int[],int,int);
+
+void masuk(int data[], int input, int &front, int &end){
+    if(front == 0 && end == MAX - 1){
+        cout<<"data full tidak";
+        cout<<MAX - 1;
+        return;
+    }else if(front > 0 && end==front-1){
+        cout<<"data full ya";
+        return;
+    }
+    else if(end == -1 && front == -1){
+         end++;
+         front++;
+    }
+    
+    else if(end == MAX-1) end=0;
+    else end++;
+    cout<<"Masukkan Nomor Antrian : ";
+    cin>>input;
+    data[end]=input;
+
+    cout<<"Nasabah dengan nomor "<<input<<" sudah masuk";
+    cout<<"\n Depan :"<<front<<"   Belakang : "<<end<<endl;
+    cout<<" Daftar nasabah :";
+    display(data,front,end);
+}
+
+void hapus(int data[], int&front, int&end){
+    if(front==-1){
+        cout<<"data kosong";
+        return;
+    }
+    if(front==end){
+        front = -1;
+        end = -1;
+        return;
+    }
+    front++;
+}
+
+void display(int data[], int front, int end){
+    if(front==-1&&end==-1){
+        cout<<"Sedang tidak Nasabah yang mengantri \n";
+        cout<<"Banyak nomor antrian yang bisa di ambil : ";
+    }
+    if(front>end){
+        for(int i=front;i<MAX;i++)
+        cout<<data[i]<<' '<<"A";//output masuk kedua
+        for(int i=0;i<=end;i++) 
+        cout<<data[i]<<' ' <<"B";//output masuk ketiga
+    }else{
+        for(int i=front;i<=end;i++)
+        cout<<data[i]<<" ";//output banyak nomor antrian yg masuk
+    }
+    cout<<endl;
+}
+
+int main() {
+    int front=-1,
+        end = -1,
+        data[MAX];
+    while(1){
+        system ("cls");
+        
+        int menu, input;
+        cout<<"APLIKASI ANTRIAN BANK JALI\n";
+        cout<<"1. Input Nomor Antrian\n";
+        cout<<"2. Panggil Nomor Antrian\n";
+        cout<<"3. Tampilkan Semua Nasabah Yang Sedang Mengantri\n";
+        cout<<"Silahkan pilih 1 - 3 : ";
+        cin >> menu;
+        switch(menu){
+            case 1:
+                masuk(data,input,front,end);
+                getch();
+                break;
+            case 2:
+                cout<<"Nasabah sudah dilayani : ";
+                hapus(data,front,end);
+                getch();
+                break;
+            case 3:
+                cout<<"Daftar Nomor Antrian yang sudah masuk : ";
+                display(data,front,end);
+                getch();
+                break;
+            default:
+                cout<<"Maaf angka yang di input tidak ada di daftar,silahkan pilih yang benar\n";
+                getch();
+                break;                
+        }
+    }
+
+}
