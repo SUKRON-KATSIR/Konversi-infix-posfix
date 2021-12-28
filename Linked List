@@ -1,0 +1,139 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+struct alamat{
+    int data;
+    alamat *link;
+};
+
+struct linklist{
+    alamat *awal,*ahir;
+    int c;
+    public:
+    linklist(){
+        awal=NULL;
+        ahir=NULL;
+    }
+
+    void insertfront(int a){
+        alamat *temp=new alamat();
+        temp->data=a;
+        if(awal==NULL){
+            temp->link=awal;
+            awal=temp; 
+            ahir=temp;   
+        }else{
+            temp->link=awal;
+            awal=temp;  
+        }
+    }
+
+    void insertrear(int a){
+        alamat *temp=new alamat();
+        temp->data=a;
+        if(awal==NULL){
+            temp->link=awal;
+            awal=temp;
+            ahir=temp;  
+        }else{
+            temp->link=NULL;
+            ahir->link=temp;
+            ahir=temp;
+        }
+    }
+
+    void Tampil(){   
+        alamat *t=awal;
+        while(t!=NULL){
+            cout<<t->data;
+            t=t->link;
+            if(t!=NULL){
+                cout<<"  ";
+            }
+        }
+    }
+
+    int deletefront(){
+        alamat *t=awal;
+        c=t->data;
+        awal=awal->link;
+        delete(t);
+        return(c);
+    }
+
+    int deleterear(){
+        alamat *t=ahir;
+        alamat *p=awal;
+        alamat *o;
+        while(p->link!=NULL){
+            o=p;
+            p=p->link;
+        }
+        c=t->data;
+        ahir=o;
+        o->link=NULL;
+        delete(t);
+        return(c);
+    }
+};
+
+int main(){
+    int t,p;
+    linklist L;
+    menu:
+    system ("cls");
+        cout<<"===========================\n";
+        cout<<"||NAMA   : SUKRON KATSIR ||\n";
+        cout<<"||NIM    : 2020520012    ||\n";
+        cout<<"===========================\n\n";
+        cout<<"Menu Penggunaan Link List \n";
+        cout<<"1.Tambah Depan \n";
+        cout<<"2.Tambah Belakang \n";
+        cout<<"3.Hapus Depan \n";
+        cout<<"4.Hapus Belakang \n";
+        cout<<"5.Tampilkan Data\n";
+        cout<<"Pilih : ";
+        cin>>t;
+        switch(t){
+            case 1: 
+                cout<<"Masukkan data "<<endl;
+                cin>>t;
+                L.insertfront(t);
+                getch();
+                goto menu;
+                break;
+                
+            case 2:
+                cout<<"Masukkan data "<<endl;
+                cin>>t;
+                L.insertrear(t);
+                getch();
+                goto menu;
+                break;
+            case 3:
+                t=L.deletefront();
+                cout<<endl<<"Data yang di hapus "<<"= "<<t;
+                getch();
+                goto menu;
+                break;
+            case 4:
+                t=L.deleterear();
+                cout<<endl<<"Data yang di hapus "<<"= "<<t;
+                getch();
+                goto menu;
+                break;
+            case 5:
+                cout<<"Data yang terdaftar : ";
+                L.Tampil();
+                getch();
+                goto menu;
+                break;
+            default:
+                cout<<"Silahkan pilih nomor yang benar"<<endl;
+                getch();
+                goto menu;
+                break;
+        }
+    return 0;
+}
