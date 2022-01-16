@@ -1,0 +1,96 @@
+#include <iostream>
+#include <conio.h>
+#define max 3
+using namespace std;
+
+typedef struct {
+    int data [max];
+    int atas; 
+    int baru,i;
+    void push ();
+    void pop ();
+    void tampil ();
+    void isfull ();
+    void hapus ();
+} stack;
+stack tumpuk;
+
+void stack::push (){
+    if (tumpuk.atas==max-1){
+        cout<<"penuh";
+        getch ();
+    }else{
+        cout<<"Masukkan Data : ";
+        cin>>baru;
+        tumpuk.atas++;
+        tumpuk.data [tumpuk.atas]=baru;
+    }
+}
+
+void stack ::pop (){
+    if (tumpuk.atas==-1){
+        cout<<"Kosong";
+        getch ();
+    }else{
+        cout<<"Data yang di ambil (Pop) : "<<tumpuk.data [tumpuk.atas];
+        tumpuk.atas--;
+        getch ();
+    } 
+}
+
+void stack ::tampil(){
+    if (tumpuk.atas == -1) {
+        cout << " Data Stack (Tumpukan)";
+        cout << "\n======================" << endl;
+        cout << " Kosong ! \n======================" << endl;
+    }else{
+        cout << " Stack : ";
+        cout << "\n======================" << endl;
+        for (i = 0; i <= tumpuk.atas; i++){
+  cout << "[ " <<tumpuk.data[i]<< " ]";
+ }
+ cout << "\n======================" << endl;
+    }
+}
+
+void stack::hapus (){
+    tumpuk.atas=-1;
+    cout<<"Tumpukan kosong!";
+}
+
+int main () {
+    stack ini;
+    tumpuk.atas=-1;
+    int pilihan;
+    do {
+        system ("cls");
+        menu:
+        ini.tampil();
+        cout<<"1.Push\n";
+        cout<<"2.Pop\n";
+        cout<<"3.Hapus\n======================\n";
+        cout<<"Pilih : "; 
+        cin>>pilihan;
+        switch (pilihan) {
+            case 1 : {
+                ini.push ();
+            }
+                break;
+            case 2: {
+                ini.pop ();
+                break;
+            }
+            case 3: {
+                ini.hapus();
+                break;
+                }
+            default:
+            {
+                cout<<"Maaf pilihan tidak ada \n";
+                getch();
+                goto menu;
+            }
+        }
+    }while (pilihan>=1 && pilihan <=4);
+    getch ();
+}
